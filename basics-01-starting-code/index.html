@@ -19,6 +19,7 @@
     <section id="user-goal">
       <h2>My Course Goal</h2>
       <p>{{outputGoal()}}</p> <!--Interpolation it can be added with the methods, ternary operator or any string data -->
+      <p v-html="outputGoal()"></p> <!--Directive to convert the string to html readable -->
       <p>Learn Vue from <a v-bind:href="vueLink">here</a></p> <!--Databinding for using a directive by the Vue-->
     </section>
   </body>

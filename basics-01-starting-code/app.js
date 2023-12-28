@@ -1,8 +1,10 @@
-const app = Vue.createApp({
+const { createApp } = Vue;
+
+const app = createApp({
 	data() {
 		// It can be added a Data which takes a method and always return a JS Object
 		return {
-			courseGoalA: "Learn Vue", // data can return anything required
+			courseGoalA: "<h3>Learn Vue</h3>", // data can return anything required
 			courseGoalB: "Master Vue", // data can return anything required
 			vueLink: "https://vuejs.org/",
 		};
