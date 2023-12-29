@@ -5,6 +5,17 @@ const app = Vue.createApp({
 			name: "",
 		};
 	},
+	computed: {
+		// This property methods only called when the dependency changes
+		fullName() {
+			// These methods needed to be return a result, it should not take any parameter nor any declaration inside the method
+			console.log("Make changes");
+			if (this.name === "") {
+				return "";
+			}
+			return this.name + " " + "Rath";
+		},
+	},
 	methods: {
 		setName(event, lastName) {
 			this.name = event.target.value + " " + lastName;
@@ -19,6 +30,13 @@ const app = Vue.createApp({
 		resetInput() {
 			this.name = "";
 		},
+		// getFullName() {
+		// 	console.log("Make changes");
+		// 	if (this.name === "") {
+		// 		return "";
+		// 	}
+		// 	return this.name + " " + "Rath";
+		// },
 	},
 });
 
