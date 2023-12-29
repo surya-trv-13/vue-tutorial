@@ -7,7 +7,7 @@ const app = Vue.createApp({
 		};
 	},
 	watch: {
-		// Watcher is only be called when we want to make some changes after dependency changes
+		// Watcher is only be called when we want to make some changes after dependency changes (it can watch both the data as well as the computed methods )
 		counter(value, oldValue) {
 			// In watcher the method name should be same as the data name.
 			console.log(value, oldValue);
