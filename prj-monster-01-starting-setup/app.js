@@ -1,0 +1,100 @@
+const { createApp } = Vue;
+
+const app = createApp({
+	data() {
+		return {
+			playerHealth: 100,
+			monsterHealth: 100,
+			currentRound: 0,
+			winner: null,
+			battleLog: [],
+		};
+	},
+	computed: {
+		monsterBarStyles() {
+			if (this.monsterHealth < 0) {
+				return { width: "0%" };
+			}
+			return { width: this.monsterHealth + "%" };
+		},
+		playerBarStyles() {
+			if (this.playerHealth < 0) {
+				return { width: "0%" };
+			}
+			return { width: this.playerHealth + "%" };
+		},
+		mayUseSpecialAttack() {
+			return this.currentRound % 3 !== 0;
+		},
+	},
+	watch: {
+		playerHealth(value, oldValue) {
+			if (value <= 0 && this.monsterHealth <= 0) {
+				this.winner = "draw";
+			} else if (value <= 0) {
+				this.winner = "monster";
+			}
+		},
+		monsterHealth(value) {
+			if (value <= 0 && this.playerHealth <= 0) {
+				this.winner = "draw";
+			} else if (value <= 0) {
+				this.winner = "player";
+			}
+		},
+	},
+	methods: {
+		startNewGame() {
+			this.playerHealth = 100;
+			this.monsterHealth = 100;
+			this.currentRound = 0;
+			this.winner = null;
+			this.battleLog = [];
+		},
+		attackMonster() {
+			const attackValue = getRandomValues(3, 12); //
+			this.monsterHealth -= attackValue;
+			this.addLogMessage("player", "attack", attackValue);
+			this.attackPlayer();
+			this.currentRound++;
+		},
+		attackPlayer() {
+			const attackValue = getRandomValues(8, 15); //
+			this.playerHealth -= attackValue;
+			this.addLogMessage("monster", "attack", attackValue);
+			this.updateBattleLog();
+		},
+		specialAttackMonster() {
+			this.currentRound++;
+			const attackValue = getRandomValues(10, 25); //
+			this.monsterHealth -= attackValue;
+			this.addLogMessage("player", "special attack", attackValue);
+			this.attackPlayer();
+		},
+		healPlayer() {
+			this.currentRound++;
+			const healValue = getRandomValues(8, 20);
+			if (this.playerHealth + healValue > 100) {
+				this.playerHealth = 100;
+			} else {
+				this.playerHealth += healValue;
+			}
+
+			this.attackPlayer();
+		},
+		surrender() {
+			this.winner = "monster";
+		},
+		addLogMessage(who, what, value) {
+			this.battleLog.unshift({
+				actionBy: who,
+				action: what,
+				value,
+			});
+		},
+	},
+});
+
+const getRandomValues = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+
+app.mount("#game");
