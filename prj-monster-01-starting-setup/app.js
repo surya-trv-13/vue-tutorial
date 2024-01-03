@@ -62,7 +62,6 @@ const app = createApp({
 			const attackValue = getRandomValues(8, 15); //
 			this.playerHealth -= attackValue;
 			this.addLogMessage("monster", "attack", attackValue);
-			this.updateBattleLog();
 		},
 		specialAttackMonster() {
 			this.currentRound++;
@@ -79,7 +78,7 @@ const app = createApp({
 			} else {
 				this.playerHealth += healValue;
 			}
-
+			this.addLogMessage("player", "heal", healValue);
 			this.attackPlayer();
 		},
 		surrender() {
@@ -88,8 +87,8 @@ const app = createApp({
 		addLogMessage(who, what, value) {
 			this.battleLog.unshift({
 				actionBy: who,
-				action: what,
-				value,
+				actionType: what,
+				actionValue: value,
 			});
 		},
 	},
