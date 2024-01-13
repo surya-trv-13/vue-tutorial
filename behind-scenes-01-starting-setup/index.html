@@ -18,9 +18,14 @@
 		</header>
 		<section id="app">
 			<h2>How Vue Works</h2>
-			<input type="text" @input="saveInput" />
+			<input type="text" ref="userText" />
+			<!--This ref is used to get the DOM element when we required not at every event change-->
 			<button @click="setText">Set Text</button>
 			<p>{{ message }}</p>
+		</section>
+		<section id="app2">
+			<p>{{messageVal}}</p>
+			<!-- Does not work as the data is of another app <p>{{messages}}</p> -->
 		</section>
 	</body>
 </html>
