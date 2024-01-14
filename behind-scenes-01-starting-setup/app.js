@@ -14,9 +14,43 @@ const app = Vue.createApp({
 			this.message = this.$refs.userText.value; // The $ sign states that
 		},
 	},
+	// Before Initialization
+	beforeCreate() {
+		console.log("Before Created");
+	},
+	// After initialization
+	created() {
+		console.log("Created");
+	},
+	// Before mount
+	beforeMount() {
+		console.log("Before Mounted");
+	},
+
+	// After mount
+	mounted() {
+		console.log("Mounted");
+	},
+	// This is recursive every update it changes
+	beforeUpdate() {
+		console.log("Before Update");
+	},
+	updated() {
+		console.log("Updated");
+	},
+	beforeUnmount() {
+		console.log("Before Unmount");
+	},
+	unmounted() {
+		console.log("Unmounted");
+	},
 });
 
 app.mount("#app");
+
+setTimeout(() => {
+	app.unmount();
+}, 5000);
 
 // Vue bind uses JS proxies to handle the data sent to UI.
 
