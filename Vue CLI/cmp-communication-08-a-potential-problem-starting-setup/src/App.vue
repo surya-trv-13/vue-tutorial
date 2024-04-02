@@ -4,7 +4,7 @@
       :topic-title="activeTopic && activeTopic.title"
       :text="activeTopic && activeTopic.fullText"
     ></active-element>
-    <knowledge-base :topics="topics" @select-topic="activateTopic"></knowledge-base>
+    <knowledge-base @select-topic="activateTopic"></knowledge-base>
   </div>
 </template>
 
@@ -32,10 +32,28 @@ export default {
       activeTopic: null,
     };
   },
+  // provide can provide the data to its childs and grand childs the data to inject
+  // we can provide the provide as an object or as an method
+  provide() {
+    return {
+      topics: this.topics,
+      activateTopic: this.activateTopic,
+    };
+  },
   methods: {
     activateTopic(topicId) {
       this.activeTopic = this.topics.find((topic) => topic.id === topicId);
     },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.topics.push({
+        id: 'event',
+        title: 'Events',
+        description: 'Events are a core concept ',
+        fullText: 'With events we can make way through the UI',
+      });
+    }, 3000);
   },
 };
 </script>
