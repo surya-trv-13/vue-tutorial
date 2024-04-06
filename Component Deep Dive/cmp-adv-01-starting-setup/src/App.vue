@@ -7,34 +7,39 @@
 			:info-text="activeUser.description"
 			:role="activeUser.role"
 		></user-info>
+		<course-guide #default="slotProps">
+			<h2>{{ slotProps.goal }}</h2>
+			<p>{{ slotProps.anotherProp }}</p>
+		</course-guide>
 	</div>
 </template>
 
 <script>
-	// Local Component it can be used in the same file, it will not allow in the child component as well.
-	import TheHeader from "./components/TheHeader.vue";
-	import BadgeList from "./components/BadgeList.vue";
-	import UserInfo from "./components/UserInfo.vue";
-	export default {
-		components: { TheHeader, BadgeList, UserInfo },
-		data() {
-			return {
-				activeUser: {
-					name: "Maximilian Schwarzmüller",
-					description: "Site owner and admin",
-					role: "admin",
-				},
-			};
-		},
-	};
+// Local Component it can be used in the same file, it will not allow in the child component as well.
+import TheHeader from "./components/TheHeader.vue";
+import BadgeList from "./components/BadgeList.vue";
+import UserInfo from "./components/UserInfo.vue";
+import CourseGuide from "./components/CourseGuide.vue";
+export default {
+	components: { TheHeader, BadgeList, UserInfo, CourseGuide },
+	data() {
+		return {
+			activeUser: {
+				name: "Maximilian Schwarzmüller",
+				description: "Site owner and admin",
+				role: "admin",
+			},
+		};
+	},
+};
 </script>
 
 <style>
-	html {
-		font-family: sans-serif;
-	}
+html {
+	font-family: sans-serif;
+}
 
-	body {
-		margin: 0;
-	}
+body {
+	margin: 0;
+}
 </style>
