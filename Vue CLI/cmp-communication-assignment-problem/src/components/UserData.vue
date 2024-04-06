@@ -14,6 +14,7 @@
 
 <script>
 	export default {
+		emits: [ 'user-data' ],
 		data() {
 			return {
 				userData: {
