@@ -37,7 +37,7 @@ app.component("friend-component", {
     </li>`, // Adding the template for the component
 	data() {
 		return {
-			detailsVisible: false,
+			detailsVisible: false, // The data are only available for the 
 			friend: {
 				id: "surya",
 				name: "Suryanarayan Rath",
