@@ -15,7 +15,11 @@
 		<h2>Dynamic Component</h2>
 		<button @click="setSelectedComponent('active-course')">Active Course</button>
 		<button @click="setSelectedComponent('manage-course')">Manage Courses</button>
-		<component :is="selectedComponent"></component>
+		<!-- Keep Alive does not destroy/ remove component from the DOM rather keep the component cached  -->
+		<!-- Hence when we visit the component again we get where we left off -->
+		<keep-alive>
+			<component :is="selectedComponent"></component>
+		</keep-alive>
 	</div>
 </template>
 
