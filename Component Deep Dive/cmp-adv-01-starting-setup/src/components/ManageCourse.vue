@@ -2,7 +2,7 @@
 	<h2>Manage Course</h2>
 	<input type="text" ref="course" />
 	<button @click="validateInput">Submit</button>
-	<!-- Teleport takes the component to a different parent body which will mnake the code sematically correct -->
+	<!-- Teleport takes the component to a different parent body which will make the code semantically correct -->
 	<teleport to="body">
 		<alert-dialog v-if="isEmptyInput">
 			<h2>The Input is empty</h2>
