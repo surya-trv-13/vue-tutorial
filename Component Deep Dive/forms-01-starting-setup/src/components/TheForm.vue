@@ -1,8 +1,20 @@
 <template>
   <form @submit.prevent="submitForm">
-    <div class="form-control">
+    <div
+      class="form-control"
+      :class="{ invalid: isInvalidUsername === 'invalid' }"
+    >
       <label for="user-name">Your Name</label>
-      <input id="user-name" name="user-name" type="text" v-model="userName" />
+      <input
+        id="user-name"
+        name="user-name"
+        type="text"
+        v-model.trim="userName"
+        @blur="validateInputUserName"
+      />
+      <p v-if="isInvalidUsername === 'invalid'">
+        Please enter your username before submitting
+      </p>
     </div>
     <div class="form-control">
       <label for="age">Your Age (Years)</label>
@@ -85,6 +97,10 @@
         <label for="how-other">Other</label>
       </div>
     </div>
+    <div class="form-control">
+      <label>Rating</label>
+      <rating-control v-model="rating"></rating-control>
+    </div>
     <hr />
     <div class="form-control">
       <input
@@ -102,7 +118,10 @@
 </template>
 
 <script>
+import RatingControl from './RatingControl.vue';
+
 export default {
+  components: { RatingControl },
   data() {
     return {
       userName: '',
@@ -111,6 +130,8 @@ export default {
       interest: [],
       how: null,
       confirmBox: false,
+      isInvalidUsername: 'pending',
+      rating: null,
     };
   },
   methods: {
@@ -128,6 +149,17 @@ export default {
       // with multiple value stores the array of values
       console.log('Confirm Box : ' + this.confirmBox);
       this.confirmBox = false;
+
+      console.log('Rating : ' + this.rating);
+      this.rating = null;
+    },
+    validateInputUserName() {
+      console.log('Called invalidate methid');
+      if (this.userName === '') {
+        this.isInvalidUsername = 'invalid';
+      } else {
+        this.isInvalidUsername = 'valid';
+      }
     },
   },
 };
@@ -145,6 +177,14 @@ form {
 
 .form-control {
   margin: 0.5rem 0;
+}
+
+.form-control.invalid input {
+  border: 1px solid red;
+}
+
+.form-control.invalid label {
+  color: red;
 }
 
 label {
