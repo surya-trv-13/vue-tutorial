@@ -2,6 +2,7 @@
   <the-navigation></the-navigation>
   <main>
     <!-- This is part of vue-router component which renders based on the path of the url -->
+    <!-- This view is only for the root routes will not work for the nested routes -->
     <router-view></router-view>
   </main>
 </template>

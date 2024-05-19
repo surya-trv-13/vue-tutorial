@@ -11,9 +11,13 @@ const router = createRouter({
   history: createWebHistory(), // history keeps the track of the last page visited by the application. and use the browser built in feature to track the history
   routes: [
     { path: '/', redirect: '/teams' }, // This redirect will redirect to the particular route whenever / will be called
-    { component: TeamsList, path: '/teams' }, // we can add alias: '<path>' to load the same page for that path as well.
+    {
+      component: TeamsList,
+      path: '/teams',
+      children: [{ component: TeamMembers, path: ':teamId', props: true }], // all the children can be added to the path.
+    }, // we can add alias: '<path>' to load the same page for that path as well.
     { component: UsersList, path: '/users' },
-    { component: TeamMembers, path: '/teams/:teamId', props: true }, // props: true allows the params to be passed to the props along with the $route
+    // { component: TeamMembers, path: '/teams/:teamId', props: true }, // props: true allows the params to be passed to the props along with the $route
     { path: '/:notFound(.*)', component: NotFoundPage }, // This is a dynamic route to redirect to a 404 page, :notFound can be rename as anything
   ],
   linkActiveClass: 'active',
