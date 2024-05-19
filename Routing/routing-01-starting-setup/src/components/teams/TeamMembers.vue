@@ -31,9 +31,7 @@ export default {
   methods: {
     loadTeamMember(teamId) {
       const selectedTeam = this.teams.find((team) => team.id === teamId);
-      console.log(selectedTeam);
       const members = selectedTeam.members;
-      console.log(members);
       const selectedMembers = [];
       for (const member of members) {
         const user = this.users.find((user) => user.id === member);
@@ -46,6 +44,12 @@ export default {
   },
   created() {
     this.loadTeamMember(this.teamId);
+    console.log(this.$route.query);
+  },
+  // this will be called when the same component is reused with new data
+  beforeRouteUpdate(to, from, next) {
+    console.log('beforeRouteUpdate', to, from);
+    next();
   },
   watch: {
     teamId(newId) {

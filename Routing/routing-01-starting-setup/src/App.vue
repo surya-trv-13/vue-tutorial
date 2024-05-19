@@ -5,6 +5,9 @@
     <!-- This view is only for the root routes will not work for the nested routes -->
     <router-view></router-view>
   </main>
+  <footer>
+    <router-view name="footer"></router-view>
+  </footer>
 </template>
 
 <script>
