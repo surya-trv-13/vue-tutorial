@@ -1,16 +1,18 @@
 <template>
-  <base-dialog
-    v-if="isInvalidInput"
-    title="Invalid Input"
-    @close="confirmDialog"
-  >
-    <template #default>
-      <p>Please enter a valid title, description and link.</p>
-    </template>
-    <template #actions>
-      <base-button @click="confirmDialog">Okay</base-button>
-    </template>
-  </base-dialog>
+  <teleport to="body">
+    <base-dialog
+      v-if="isInvalidInput"
+      title="Invalid Input"
+      @close="confirmDialog"
+    >
+      <template #default>
+        <p>Please enter a valid title, description and link.</p>
+      </template>
+      <template #actions>
+        <base-button @click="confirmDialog">Okay</base-button>
+      </template>
+    </base-dialog>
+  </teleport>
   <base-card>
     <form @submit.prevent="addResources">
       <div class="form-control">
